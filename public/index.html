@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Launcher</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #111;
+      padding: 20px;
+      border-radius: 5px;
+      width: 300px;
+      border: 1px solid #9929EA;
+    }
+    h1 {
+      color: #9929EA;
+      text-align: center;
+      margin-top: 0;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      background: #222;
+      color: #9929EA;
+      border: 1px solid #333;
+    }
+    button {
+      background: #9929EA;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #aa3afb;
+    }
+    #status {
+      color: #9929EA;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Multi-Method Launcher</h1>
+    <input id="target" placeholder="Target URL" />
+    <input id="duration" type="number" placeholder="Duration (s)" />
+    <select id="method">
+      <optgroup label="⇩ BASIC METHODS ⇩">
+         <option value="get">GET</option>
+         <option value="post">POST</option>
+         <option value="head">HEAD</option>
+      </optgroup>
+      
+      <optgroup label="⇩ HTTP SPAM ⇩">
+        <option value="http-spam">HTTP-SPAM</option>
+        <option value="http-spam-v2">HTTP-SPAM-V2</option>
+        <option value="http-spam-v3">HTTP-SPAM-V3</option>
+        <option value="http-spam-v4">HTTP-SPAM-V4</option>
+        <option value="http-spam-v5">HTTP-SPAM-V5</option>
+      </optgroup>
+      
+      <optgroup label="⇩ BEST METHODS ⇩">
+        <option value="proxy">PROXY (NOT WORKING)</option>
+        <option value="ghost">GHOST</option>
+        <option value="void">VOID</option>
+        <option value="hell">HELL</option>
+        <option value="∞">∞</option>
+        <option value="z-fast">Z-FAST</option>
+        <option value="h-fast">H-FAST</option>
+        <option value="bullet">BULLET</option>
+        <option value="stealth">STEALTH</option>
+        <option value="payload">PAYLOAD</option>
+        <option value="anjay">ANJAY</option>
+      </optgroup>
+      
+      <optgroup label="⇩ SLOW METHODS ⇩">
+        <option value="throttle">THROTTLE</option>
+        <option value="slow-request">SLOW-REQUEST</option>
+        <option value="slowloris-like">SLOWLORIS-LIKE</option>
+        <option value="slow-post-flood">SLOW-POST-FLOOD</option>
+      </optgroup>
+      
+      <optgroup label="⇩ FLOOD METHODS ⇩">
+        <option value="header-flood">HEADER-FLOOD</option>
+        <option value="cookie-flood">COOKIE-FLOOD</option>
+        <option value="referer-flood">REFERER-FLOOD</option>
+        <option value="query-floods">QUERY-FLOOD</option>
+        <option value="flood-html">FLOOD-HTML-BODY</option>
+      </optgroup>
+      
+      <optgroup label="⇩ BYPASS METHODS ⇩">
+        <option value="cloudflare-bypass">CLOUDFLARE-BYPASS</option>
+        <option value="bounce-bypass">BOUNCE-BYPASS</option>
+        <option value="301-bypass">301-BYPASS</option>
+        <option value="403-bypass">403-BYPASS</option>
+        <option value="cache-bypass">CACHE-BYPASS-FLOOD</option>
+      </optgroup>
+      
+      <optgroup label="⇩ UNKNOWN ⇩">
+        <option value="chrome">CHROME</option>
+        <option value="x-mix">X-MIX</option>
+        <option value="roulette">ROULETTE</option>
+        <option value="random-spam">RANDOMIZED-SPAM</option>
+        <option value="random-path">RANDOM-PATH-FLOOD</option>
+        <option value="header-bomb">HEADER-BOMB-FLOOD</option>
+        <option value="long-url">LONG-URL-FLOOD</option>
+        <option value="reverse-path">REVERSE-PATH-FLOOD</option>
+        <option value="fake-json">FAKE-JSON-POST</option>
+        <option value="mixed-header">MIXED-HEADER-PATH</option>
+      </optgroup>
+    </select>
+    <button onclick="launch()">Launch</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    function launch() {
+      const target = document.getElementById('target').value;
+      const duration = document.getElementById('duration').value;
+      const method = document.getElementById('method').value;
+
+      fetch('/launch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ target, duration, method })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('status').textContent = data.message || data.error;
+      });
+    }
+  </script>
+</body>
+</html>
